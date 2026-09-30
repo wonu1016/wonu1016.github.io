@@ -19,7 +19,7 @@ export const HEADERS = [
   ['X-Developer', 'wonu'], ['X-Motto', 'worry-free'], ['X-Response-Time', '38ms']
 ];
 
-// x, y: 캨버스 좌표. main 이 true 면 Folio 카드(클릭하면 상세 화면으로 확대)
+// x, y: 캔버스 좌표. main 이 true 면 Folio 카드(클릭하면 상세 화면으로 확대)
 export const PROJECTS = [
   { name: 'Folio', main: true, x: 0, y: -80 },
   { name: 'Reply', x: -470, y: -300, tags: ['FastAPI', 'Chrome Ext'] },
