@@ -9,7 +9,11 @@ export default defineConfig({
   build: {
     rollupOptions: {
       external: ['react', 'react-dom', 'react-dom/client', 'react/jsx-runtime', 'ogl'],
-      output: { entryFileNames: 'assets/app.js', assetFileNames: 'assets/[name][extname]' }
+      output: {
+        entryFileNames: 'assets/app.js',
+        assetFileNames: 'assets/[name][extname]',
+        banner: '/*! Includes Electric Logo from React Bits (https://reactbits.dev) - Copyright (c) 2026 David Haz - MIT + Commons Clause */'
+      }
     }
   }
 });
