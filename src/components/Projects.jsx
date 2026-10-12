@@ -174,7 +174,7 @@ export default function Projects() {
               </article>
             ) : (
               <button className="card sub" type="button" onClick={() => openProject(p)} aria-label={`${p.name} 상세 보기`}>
-                <h5>{p.name}</h5><div className="tags">{p.tags.map(t => <span className="tag" key={t}>{t}</span>)}</div><span className="sub-open">간단히 보기 →</span>
+                <h5>{p.name}</h5><div className="tags">{p.tags.map(t => <span className="tag" key={t}>{t}</span>)}</div><span className="sub-open">자세히 보기 <b aria-hidden="true">→</b></span>
               </button>
             )}
           </div>
