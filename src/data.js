@@ -73,6 +73,13 @@ export const PROJECTS = [
 
 export const FOLIO = {
   tags: ['Node.js', 'FastAPI', 'React', '팀 AI 협업'],
+  cover: './images/folio/cover.png',
+  screenshots: [
+    { src: './images/folio/home.png', title: '포트폴리오 업로드 · 분석 시작' },
+    { src: './images/folio/report.png', title: '역량 분석 리포트' },
+    { src: './images/folio/recommendations.png', title: '맞춤 기업 추천' },
+    { src: './images/folio/roadmap.png', title: '커리어 로드맵' }
+  ],
   summary: 'AI 포트폴리오 분석 서비스',
   period: '2026.01 – 04',
   meta: [['기간', '2026.01.06 – 04.16'], ['팀', 'FE 1 · BE 1 · AI 1'], ['역할', 'Backend'], ['구분', '교내 방학 프로젝트']],

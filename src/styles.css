@@ -201,8 +201,6 @@ nav .links a:hover{color:var(--fg)}
 .card.hov .tag:nth-child(2){transform:translateY(-2px);transition-delay:.06s}
 .card.hov .tag:nth-child(3){transform:translateY(-2px);transition-delay:.1s}
 .card.hov .tag:nth-child(4){transform:translateY(-2px);transition-delay:.14s}
-.feature .thumb span{transition:transform .5s var(--ease)}
-.feature.hov .thumb span{transform:translate(10px,-6px) scale(1.06)}
 .feature .thumb::after{content:"";position:absolute;inset:0;opacity:0;transition:opacity .3s;
   background:radial-gradient(220px circle at var(--cx) var(--cy),rgba(255,255,255,.28),transparent 60%)}
 .feature.hov .thumb::after{opacity:1}
@@ -211,15 +209,12 @@ nav .links a:hover{color:var(--fg)}
 @media (hover:none){.stage.has-hov .card:not(.hov){opacity:1;filter:none}}
 .feature{width:520px;padding:14px;cursor:pointer}
 .feature .thumb{height:250px;border-radius:16px;position:relative;overflow:hidden;color:#e8eefc;background:var(--report-bg)}
+.feature .thumb img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 52%;transition:transform .5s var(--ease)}
+.feature.hov .thumb img{transform:scale(1.04)}
 .report-bg,.feature .thumb,.d-hero{--report-bg:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px) 0 0/100% 28px,linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px) 0 0/28px 100%,#0c1427}
 .radar{position:absolute;right:18px;top:50%;width:190px;height:190px;transform:translateY(-50%)}
 .radar .rg polygon,.radar .rg line{fill:none;stroke:rgba(255,255,255,.14);stroke-width:1}
 .radar .rd{fill:rgba(91,157,255,.28);stroke:#6ea8ff;stroke-width:2;stroke-linejoin:round}
-.rep-tag{position:absolute;left:22px;top:18px;font:500 11px/1 var(--mono);letter-spacing:.04em;color:#8fb6ff}
-.rep-bars{position:absolute;left:24px;top:48px;display:grid;gap:9px;width:150px}
-.rep-bars i{display:block;height:6px;border-radius:3px;background:rgba(255,255,255,.1);position:relative;overflow:hidden}
-.rep-bars i::after{content:"";position:absolute;inset:0;width:var(--w);border-radius:inherit;background:#6ea8ff}
-.feature .thumb span{position:absolute;left:22px;bottom:12px;font-size:76px;font-weight:900;letter-spacing:-.05em;color:#fff}
 .feature .thumb small{position:absolute;right:16px;top:14px;font-size:12px;padding:6px 10px;border-radius:999px;background:rgba(0,0,0,.35);color:#fff}
 .feature .meta{padding:16px 8px 6px;display:flex;justify-content:space-between;gap:12px;align-items:end}
 .feature h4{font-size:22px;font-weight:800}
@@ -260,12 +255,18 @@ nav .links a:hover{color:var(--fg)}
 .flow{display:flex;flex-wrap:wrap;gap:8px;counter-reset:f}
 .flow span{counter-increment:f;font-size:14px;padding:10px 14px;border-radius:12px;background:var(--card2);border:1px solid var(--line)}
 .flow span::before{content:counter(f);color:var(--accent);font-weight:800;margin-right:8px}
-.shots{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.shots div{aspect-ratio:4/3;border-radius:14px;background:var(--card2);border:1px dashed var(--edge);display:grid;place-items:center;color:var(--muted);font-size:12px}
+.shots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.shot{display:block;min-width:0;border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--line);transition:border-color .2s,transform .2s var(--ease)}
+.shot:hover{border-color:var(--accent);transform:translateY(-3px)}
+.shot:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.shot img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;object-position:top}
+.shot span{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 15px;font-size:13px;font-weight:600}
+.shot i{font-style:normal;color:var(--accent)}
 .trouble{display:grid;gap:12px}
 .trouble div{padding:18px 20px;border-radius:16px;background:var(--card2);border:1px solid var(--line)}
 .trouble b{color:var(--fg);display:block;margin-bottom:4px}
-@media(max-width:760px){.d-grid{grid-template-columns:1fr;gap:10px 0}.d-grid h6{padding-top:24px}.shots{grid-template-columns:1fr 1fr}}
+@media(max-width:760px){.d-grid{grid-template-columns:1fr;gap:10px 0}.d-grid h6{padding-top:24px}}
+@media(max-width:560px){.shots{grid-template-columns:1fr}}
 
 /* ============ SKILLS / CAREER / CONTACT ============ */
 #career{padding:140px 0 40px}

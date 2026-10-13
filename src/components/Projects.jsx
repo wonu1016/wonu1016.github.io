@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import Sbtn from './Sbtn.jsx';
-import Radar from './Radar.jsx';
 import FolioDetail from './FolioDetail.jsx';
 import ProjectDetail from './ProjectDetail.jsx';
 import { PROJECTS, FOLIO, PROJECT_DETAILS } from '../data.js';
@@ -159,9 +158,7 @@ export default function Projects() {
               <article className="card feature" id="folioCard" ref={folioRef} role="button" tabIndex={0} aria-label="Folio 상세 보기"
                 onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openDetail(); } }}>
                 <div className="thumb">
-                  <div className="rep-tag">PORTFOLIO REPORT</div>
-                  <div className="rep-bars"><i style={{ '--w': '82%' }} /><i style={{ '--w': '64%' }} /><i style={{ '--w': '73%' }} /></div>
-                  <Radar /><span>Folio</span>
+                  <img src={FOLIO.cover} alt="Folio 프로젝트 대표 이미지" loading="lazy" />
                 </div>
                 <div className="meta">
                   <div>
