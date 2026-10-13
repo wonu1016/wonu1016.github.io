@@ -141,6 +141,39 @@ nav .links a:hover{color:var(--fg)}
 .j-caret{display:inline-block;width:.55em;height:1.1em;vertical-align:-.2em;background:var(--accent);animation:blink 1s steps(1) infinite}
 @media(max-width:860px){.about{grid-template-columns:1fr;gap:40px}}
 
+/* ============ SKILLS: 설명 중심 기술 카드 ============ */
+#skills{padding:110px 0 90px;background:linear-gradient(180deg,var(--bg),var(--bg2) 48%,var(--bg))}
+.skills-heading{display:flex;justify-content:space-between;align-items:end;gap:32px;margin-bottom:34px}
+.skills-heading h2{margin-bottom:0;line-height:1.18}
+.skills-heading h2 em{font-style:normal;color:var(--accent)}
+.skills-heading p{max-width:310px;color:var(--muted);line-height:1.75;font-size:15px;padding-bottom:4px}
+.skills-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.skill-card{position:relative;display:flex;flex-direction:column;min-width:0;padding:28px 30px;border:1px solid var(--line);border-radius:22px;background:var(--card);overflow:hidden}
+.skill-card::before{content:"";position:absolute;inset:0 0 auto;height:2px;background:linear-gradient(90deg,var(--accent),transparent);opacity:.35}
+.skill-card-featured{grid-column:1/-1;padding:34px 38px;background:linear-gradient(120deg,color-mix(in srgb,var(--accent) 10%,var(--card)),var(--card) 65%);border-color:color-mix(in srgb,var(--accent) 30%,var(--line))}
+.skill-card-featured::before{opacity:1}
+.skill-card-top{display:flex;align-items:center;gap:12px;font:600 11px/1.4 var(--mono);letter-spacing:.08em;color:var(--muted)}
+.skill-index{color:var(--accent)}
+.skill-category{padding-left:12px;border-left:1px solid var(--edge)}
+.skill-card h3{font-size:clamp(24px,3vw,34px);letter-spacing:-.035em;margin-top:24px}
+.skill-card-featured h3{font-size:clamp(30px,4vw,42px)}
+.skill-summary{font-size:16px;line-height:1.7;margin-top:8px;max-width:800px}
+.skill-abilities{list-style:none;display:grid;gap:10px;margin-top:22px;padding-top:20px;border-top:1px solid var(--line)}
+.skill-abilities li{position:relative;padding-left:18px;color:var(--muted);font-size:14px;line-height:1.65}
+.skill-abilities li::before{content:"";position:absolute;left:0;top:.7em;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.skill-card-featured .skill-abilities{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 24px}
+.skill-note{color:var(--muted);font-size:12px;line-height:1.6;margin-top:20px}
+.skill-source{align-self:flex-start;color:var(--accent);font-size:13px;font-weight:700;margin-top:auto;padding-top:20px}
+.skill-source:hover,.skills-foot a:hover{text-decoration:underline;text-underline-offset:4px}
+.skill-source:focus-visible,.skills-foot a:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.skills-foot{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;margin-top:20px;padding:22px 4px;border-top:1px solid var(--line);font-size:13px;line-height:1.7}
+.skills-foot span{font:600 11px var(--mono);letter-spacing:.08em;color:var(--accent);white-space:nowrap}
+.skills-foot p{flex:1;min-width:260px;color:var(--muted)}
+.skills-foot p b{color:var(--fg);font-weight:600}
+.skills-foot a{color:var(--accent);font-weight:700;white-space:nowrap}
+@media(max-width:760px){.skills-heading{display:block}.skills-heading p{margin-top:18px}.skill-card-featured .skill-abilities{grid-template-columns:1fr}.skill-card-featured{padding:28px 30px}}
+@media(max-width:620px){#skills{padding:80px 0 40px}.skills-grid{grid-template-columns:1fr}.skill-card-featured{grid-column:auto}.skill-card{padding:26px 24px}.skills-foot{align-items:flex-start}}
+
 /* ============ PROJECTS 무한 캔버스 ============ */
 #projects{padding-top:100px}
 .stage{position:relative;height:100svh;min-height:640px;max-height:1100px;margin-top:10px;overflow:hidden;cursor:grab;touch-action:none;

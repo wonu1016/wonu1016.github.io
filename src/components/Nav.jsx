@@ -21,7 +21,7 @@ export default function Nav({ theme, onToggle }) {
     <nav ref={ref}>
       <a className="logo" href="#hero">WONU</a>
       <div className="links">
-        <a href="#about">About</a><a href="#projects">Projects</a><a href="#career">Career</a><a href="#contact">Contact</a>
+        <a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#career">Career</a><a href="#contact">Contact</a>
       </div>
       <Sbtn sm onClick={onToggle} aria-label="테마 전환">{theme === 'dark' ? '☾' : '☀'}</Sbtn>
     </nav>

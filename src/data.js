@@ -19,6 +19,48 @@ export const HEADERS = [
   ['X-Developer', 'wonu'], ['X-Motto', 'worry-free'], ['X-Response-Time', '38ms']
 ];
 
+// 노션 Skill stack의 상세 설명과 실제 프로젝트에서 맡은 범위를 기준으로 작성.
+export const SKILLS = [
+  {
+    name: 'Spring Boot', category: 'MAIN BACKEND', featured: true,
+    summary: 'REST API를 설계하고, 인증부터 데이터 저장·실시간 통신까지 서버 기능을 구현할 수 있습니다.',
+    abilities: [
+      'JPA 기반 ORM 설계와 데이터베이스 연동, Gradle 빌드·의존성 관리',
+      'Spring Security·JWT 인증/인가와 Google OAuth 2.0 소셜 로그인',
+      'WebSocket 양방향 통신, 유효성 검증·예외 처리, Redis·이메일·파일 업로드 연동'
+    ],
+    source: 'https://app.notion.com/p/3747ea1e11818074aee1d550c2adc6d5'
+  },
+  {
+    name: 'Java', category: 'LANGUAGE',
+    summary: '객체지향 원칙을 적용해 확장 가능한 서버 코드를 작성합니다.',
+    abilities: [
+      '클래스·인터페이스·추상 클래스를 활용한 구조 설계',
+      '예외 처리·제네릭·컬렉션·Stream API를 활용한 데이터 처리',
+      '멀티스레드, JVM 메모리 구조와 GC의 기본 개념 이해'
+    ],
+    source: 'https://app.notion.com/p/3747ea1e118180a5975be68a106f1de6'
+  },
+  {
+    name: 'Node.js', category: 'BACKEND',
+    summary: '서버의 기본 구조를 이해하고, 데이터베이스와 연결해 조회·저장 기능을 구현할 수 있습니다.',
+    abilities: ['서버 애플리케이션 구조 구성', 'DB 연결 설정과 기본 조회·저장 기능 구현'],
+    source: 'https://app.notion.com/p/3747ea1e118180fab528ecca3c061481'
+  },
+  {
+    name: 'FastAPI', category: 'BACKEND · TEAM PROJECT',
+    summary: '팀 프로젝트에서 API 구조와 인증 흐름을 맡아 AI 담당자의 기능을 서비스에 연결했습니다.',
+    abilities: ['요청·응답 스키마와 REST API 엔드포인트 설계', 'JWT 인증 및 외부 서비스 연동'],
+    note: 'AI 모델·OpenAI 기능 자체는 담당하지 않았습니다.'
+  },
+  {
+    name: 'React · JavaScript', category: 'FRONTEND',
+    summary: '컴포넌트로 화면을 구성하고 백엔드 API와 연결하는 웹 개발을 경험했습니다.',
+    abilities: ['컴포넌트 기반 UI 구성', '사용자 입력과 API 응답을 화면 상태에 반영'],
+    note: '현재 포트폴리오 사이트도 React로 제작했습니다.'
+  }
+];
+
 // x, y: 캔버스 좌표. main 이 true 면 Folio 카드(클릭하면 상세 화면으로 확대)
 export const PROJECTS = [
   { name: 'Folio', main: true, x: 0, y: -80 },

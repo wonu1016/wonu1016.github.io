@@ -1,6 +1,7 @@
 import Nav from './components/Nav.jsx';
 import Hero from './components/Hero.jsx';
 import About from './components/About.jsx';
+import Skills from './components/Skills.jsx';
 import Projects from './components/Projects.jsx';
 import Career from './components/Career.jsx';
 import Contact from './components/Contact.jsx';
@@ -18,6 +19,7 @@ export default function App() {
       <main>
         <Hero theme={theme} />
         <About />
+        <Skills />
         <Projects />
         <Career />
         <Contact />
