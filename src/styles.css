@@ -141,38 +141,53 @@ nav .links a:hover{color:var(--fg)}
 .j-caret{display:inline-block;width:.55em;height:1.1em;vertical-align:-.2em;background:var(--accent);animation:blink 1s steps(1) infinite}
 @media(max-width:860px){.about{grid-template-columns:1fr;gap:40px}}
 
-/* ============ SKILLS: 설명 중심 기술 카드 ============ */
-#skills{padding:110px 0 90px;background:linear-gradient(180deg,var(--bg),var(--bg2) 48%,var(--bg))}
-.skills-heading{display:flex;justify-content:space-between;align-items:end;gap:32px;margin-bottom:34px}
-.skills-heading h2{margin-bottom:0;line-height:1.18}
-.skills-heading h2 em{font-style:normal;color:var(--accent)}
-.skills-heading p{max-width:310px;color:var(--muted);line-height:1.75;font-size:15px;padding-bottom:4px}
-.skills-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-.skill-card{position:relative;display:flex;flex-direction:column;min-width:0;padding:28px 30px;border:1px solid var(--line);border-radius:22px;background:var(--card);overflow:hidden}
-.skill-card::before{content:"";position:absolute;inset:0 0 auto;height:2px;background:linear-gradient(90deg,var(--accent),transparent);opacity:.35}
-.skill-card-featured{grid-column:1/-1;padding:34px 38px;background:linear-gradient(120deg,color-mix(in srgb,var(--accent) 10%,var(--card)),var(--card) 65%);border-color:color-mix(in srgb,var(--accent) 30%,var(--line))}
-.skill-card-featured::before{opacity:1}
-.skill-card-top{display:flex;align-items:center;gap:12px;font:600 11px/1.4 var(--mono);letter-spacing:.08em;color:var(--muted)}
-.skill-index{color:var(--accent)}
-.skill-category{padding-left:12px;border-left:1px solid var(--edge)}
-.skill-card h3{font-size:clamp(24px,3vw,34px);letter-spacing:-.035em;margin-top:24px}
-.skill-card-featured h3{font-size:clamp(30px,4vw,42px)}
-.skill-summary{font-size:16px;line-height:1.7;margin-top:8px;max-width:800px}
-.skill-abilities{list-style:none;display:grid;gap:10px;margin-top:22px;padding-top:20px;border-top:1px solid var(--line)}
-.skill-abilities li{position:relative;padding-left:18px;color:var(--muted);font-size:14px;line-height:1.65}
-.skill-abilities li::before{content:"";position:absolute;left:0;top:.7em;width:6px;height:6px;border-radius:50%;background:var(--accent)}
-.skill-card-featured .skill-abilities{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 24px}
-.skill-note{color:var(--muted);font-size:12px;line-height:1.6;margin-top:20px}
-.skill-source{align-self:flex-start;color:var(--accent);font-size:13px;font-weight:700;margin-top:auto;padding-top:20px}
-.skill-source:hover,.skills-foot a:hover{text-decoration:underline;text-underline-offset:4px}
-.skill-source:focus-visible,.skills-foot a:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
-.skills-foot{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;margin-top:20px;padding:22px 4px;border-top:1px solid var(--line);font-size:13px;line-height:1.7}
-.skills-foot span{font:600 11px var(--mono);letter-spacing:.08em;color:var(--accent);white-space:nowrap}
-.skills-foot p{flex:1;min-width:260px;color:var(--muted)}
-.skills-foot p b{color:var(--fg);font-weight:600}
-.skills-foot a{color:var(--accent);font-weight:700;white-space:nowrap}
-@media(max-width:760px){.skills-heading{display:block}.skills-heading p{margin-top:18px}.skill-card-featured .skill-abilities{grid-template-columns:1fr}.skill-card-featured{padding:28px 30px}}
-@media(max-width:620px){#skills{padding:80px 0 40px}.skills-grid{grid-template-columns:1fr}.skill-card-featured{grid-column:auto}.skill-card{padding:26px 24px}.skills-foot{align-items:flex-start}}
+/* ============ SKILLS: 로고 갤러리 + 활용 경험 다이얼로그 ============ */
+#skills{padding:100px 0 90px;scroll-margin-top:90px;background:radial-gradient(ellipse at 50% 55%,color-mix(in srgb,var(--accent) 4%,transparent),transparent 70%)}
+.skills-heading{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:36px}
+.skills-heading h2{margin-bottom:0;line-height:1.15}
+.skills-heading h2 span{color:var(--accent)}
+.skills-heading p{font-size:14px;line-height:1.7;color:var(--muted)}
+.skills-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.skill-trigger{position:relative;isolation:isolate;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;min-width:0;min-height:190px;padding:32px 16px 25px;border:1px solid var(--edge);border-radius:22px;background:var(--card);color:var(--fg);font:inherit;cursor:pointer;overflow:hidden;transition:transform .25s var(--ease),border-color .25s,box-shadow .25s;-webkit-tap-highlight-color:transparent}
+.skill-trigger::before{content:"";position:absolute;inset:0;z-index:-1;opacity:0;background:radial-gradient(ellipse at 50% 100%,color-mix(in srgb,var(--skill-color) 14%,transparent),transparent 75%);transition:opacity .25s}
+.skill-trigger-main{border-color:color-mix(in srgb,var(--skill-color) 45%,var(--edge))}
+.skill-trigger-main::before{opacity:.45}
+.skill-trigger:hover{transform:translateY(-5px);border-color:color-mix(in srgb,var(--skill-color) 65%,var(--edge));box-shadow:0 14px 30px -20px color-mix(in srgb,var(--skill-color) 55%,transparent)}
+.skill-trigger:hover::before,.skill-trigger:focus-visible::before{opacity:1}
+.skill-trigger:active{transform:translateY(-1px) scale(.98)}
+.skill-trigger:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.skill-logo{display:grid;place-items:center;flex:none;width:82px;height:82px;border-radius:22px;background:color-mix(in srgb,var(--skill-color) 6%,var(--card2));transition:transform .3s var(--ease)}
+.skill-logo img{display:block;width:56px;height:56px;object-fit:contain}
+.skill-trigger:hover .skill-logo{transform:translateY(-3px) rotate(-4deg)}
+.skill-name{font-size:18px;line-height:1.2;font-weight:700;letter-spacing:-.02em}
+.skill-main-label{position:absolute;top:13px;left:15px;font:600 9px/1 var(--mono);letter-spacing:.1em;color:var(--accent)}
+.skill-open-mark{position:absolute;top:12px;right:15px;color:var(--muted);font:300 22px/1 var(--mono);transition:color .25s,transform .25s}
+.skill-trigger:hover .skill-open-mark{color:var(--fg);transform:rotate(90deg)}
+.skills-footer{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:24px;font-size:12px;color:var(--muted)}
+.skills-footer a{display:inline-flex;align-items:center;gap:7px;color:var(--accent);font-weight:600}
+.skills-footer a:hover,.skill-source:hover{text-decoration:underline;text-underline-offset:4px}
+.skills-footer a:focus-visible,.skill-source:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.skill-dialog{position:fixed;inset:0;width:min(620px,calc(100% - 40px));max-height:calc(100svh - 48px);margin:auto;padding:0;border:1px solid var(--edge);border-radius:28px;background:var(--card);color:var(--fg);overflow:auto;overscroll-behavior:contain;box-shadow:0 32px 100px rgba(0,0,0,.35)}
+.skill-dialog::backdrop{background:rgba(3,7,18,.65);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.skill-dialog[open]{animation:skillDialogIn .25s var(--ease)}
+.skill-dialog-content{position:relative;padding:36px;background:radial-gradient(ellipse at 0 0,color-mix(in srgb,var(--skill-color) 9%,transparent),transparent 55%)}
+.skill-dialog-close{position:absolute;top:20px;right:20px;display:grid;place-items:center;width:36px;height:36px;border:1px solid var(--edge);border-radius:50%;background:var(--btn);color:var(--muted);cursor:pointer;transition:color .2s,background .2s}
+.skill-dialog-close:hover{color:var(--fg);background:var(--card2)}
+.skill-dialog-close:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.skill-dialog-heading{display:flex;align-items:center;gap:20px;padding-right:24px}
+.skill-dialog-category{font:500 10px/1.5 var(--mono);letter-spacing:.1em;color:var(--muted)}
+.skill-dialog-heading h3{font-size:32px;line-height:1.15;letter-spacing:-.04em;margin-top:6px}
+.skill-dialog-summary{font-size:17px;line-height:1.75;margin-top:26px;word-break:keep-all;overflow-wrap:anywhere}
+.skill-abilities-title{margin-top:30px;padding-top:26px;border-top:1px solid var(--edge);font-size:12px;font-weight:600;color:var(--muted)}
+.skill-abilities{list-style:none;display:grid;gap:18px;margin-top:20px}
+.skill-abilities li{display:flex;align-items:baseline;gap:15px}
+.skill-abilities li>span{font:500 11px/1.7 var(--mono);color:var(--accent);flex:none}
+.skill-abilities li p{font-size:14px;line-height:1.75;color:var(--fg);word-break:keep-all;overflow-wrap:anywhere}
+.skill-note{padding:14px 16px;margin-top:24px;background:var(--card2);border-radius:12px;font-size:12px;line-height:1.7;color:var(--muted)}
+.skill-source{display:inline-flex;align-items:center;gap:8px;margin-top:28px;font-size:13px;font-weight:600;color:var(--accent)}
+@keyframes skillDialogIn{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:none}}
+@media(max-width:760px){.skills-grid{gap:12px}.skill-trigger{min-height:166px;padding:32px 12px 22px;gap:14px}.skill-logo{width:68px;height:68px;border-radius:18px}.skill-logo img{width:46px;height:46px}.skill-name{font-size:16px}}
+@media(max-width:620px){#skills{padding:80px 0 50px}.skills-heading{display:block;margin-bottom:28px}.skills-heading p{margin-top:16px}.skills-heading p br{display:none}.skills-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.skill-trigger{min-height:168px}.skills-footer{font-size:11px;align-items:start}.skills-footer>span{max-width:145px}.skills-footer a{white-space:nowrap}.skill-dialog{width:calc(100% - 28px);border-radius:22px}.skill-dialog-content{padding:30px 24px}.skill-dialog-heading{gap:14px}.skill-dialog-heading h3{font-size:28px}.skill-dialog-heading .skill-logo{width:60px;height:60px;border-radius:16px}.skill-dialog-heading .skill-logo img{width:40px;height:40px}.skill-dialog-category{font-size:9px}.skill-dialog-close{top:14px;right:14px;width:30px;height:30px}.skill-dialog-summary{font-size:16px;margin-top:24px}}
 
 /* ============ PROJECTS 무한 캔버스 ============ */
 #projects{padding-top:100px}
