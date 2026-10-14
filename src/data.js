@@ -22,7 +22,7 @@ export const HEADERS = [
 // 노션 Skill stack의 상세 설명과 실제 프로젝트에서 맡은 범위를 기준으로 작성.
 export const SKILLS = [
   {
-    name: 'Spring Boot', category: 'MAIN BACKEND', featured: true,
+    name: 'Spring Boot', category: 'MAIN STACK', featured: true,
     summary: 'REST API를 설계하고, 인증부터 데이터 저장·실시간 통신까지 서버 기능을 구현할 수 있습니다.',
     abilities: [
       'JPA 기반 ORM 설계와 데이터베이스 연동, Gradle 빌드·의존성 관리',
