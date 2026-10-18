@@ -30,7 +30,7 @@ export default function Skills() {
       const motion = dialog.animate([
         { opacity: 0, transform: `translate(${x}px, ${y}px) scale(.86)`, filter: 'blur(4px)' },
         { opacity: 1, transform: 'translate(0, 0) scale(1)', filter: 'blur(0px)' }
-      ], { duration: 520, easing: 'cubic-bezier(.16,1,.3,1)', fill: 'both' });
+      ], { duration: 900, easing: 'cubic-bezier(.22,.61,.36,1)', fill: 'both' });
       motionRef.current = motion;
       motion.onfinish = () => {
         dialog.dataset.state = 'open';
@@ -70,7 +70,7 @@ export default function Skills() {
     const motion = dialog.animate([
       from,
       { opacity: 0, transform: 'translateY(14px) scale(.96)', filter: 'blur(3px)' }
-    ], { duration: 230, easing: 'cubic-bezier(.4,0,1,1)', fill: 'both' });
+    ], { duration: 320, easing: 'cubic-bezier(.4,0,1,1)', fill: 'both' });
     motionRef.current = motion;
     motion.onfinish = () => dialog.close();
   };
@@ -116,7 +116,7 @@ export default function Skills() {
         onCancel={event => { event.preventDefault(); closeSkill(); }}
         onClick={event => { if (event.target === event.currentTarget) closeSkill(); }}
       >
-        {selected && <div className="skill-dialog-content" style={{ '--skill-color': selected.color }}>
+        {selected && <div className="skill-dialog-content" style={{ '--skill-color': selected.color, '--skill-footer-delay': `${460 + selected.abilities.length * 110}ms` }}>
           <button className="skill-dialog-close" type="button" aria-label="기술 설명 닫기" onClick={closeSkill}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg>
           </button>
@@ -127,7 +127,7 @@ export default function Skills() {
           <p id="skill-dialog-summary" className="skill-dialog-summary">{selected.summary}</p>
           <h4 className="skill-abilities-title">이렇게 활용할 수 있어요</h4>
           <ul className="skill-abilities">
-            {selected.abilities.map((ability, index) => <li key={ability} style={{ '--skill-delay': `${220 + index * 65}ms` }}><span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span><p>{ability}</p></li>)}
+            {selected.abilities.map((ability, index) => <li key={ability} style={{ '--skill-delay': `${460 + index * 110}ms` }}><span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span><p>{ability}</p></li>)}
           </ul>
           {selected.note && <p className="skill-note">{selected.note}</p>}
           {selected.source && <a className="skill-source" href={selected.source} target="_blank" rel="noopener noreferrer">노션에서 자세히 보기 <Arrow /></a>}
