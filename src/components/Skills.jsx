@@ -1,24 +1,79 @@
-import { useEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { NOTION, SKILLS } from '../data.js';
 
 const logo = skill => `./images/skills/${skill.icon}.svg`;
 const Arrow = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10" /></svg>;
+const reducedMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 export default function Skills() {
   const [selected, setSelected] = useState(null);
   const dialogRef = useRef(null);
+  const originRef = useRef(null);
+  const motionRef = useRef(null);
+  const closingRef = useRef(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!selected) return;
     const dialog = dialogRef.current;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
+    closingRef.current = false;
+    dialog.dataset.state = reducedMotion() ? 'open' : 'opening';
     dialog.showModal();
+    dialog.scrollTop = 0;
+
+    if (!reducedMotion()) {
+      const rect = dialog.getBoundingClientRect();
+      const origin = originRef.current;
+      const x = origin ? Math.max(-160, Math.min(160, origin.x - rect.left - rect.width / 2)) : 0;
+      const y = origin ? Math.max(-100, Math.min(100, origin.y - rect.top - rect.height / 2)) : 24;
+      const motion = dialog.animate([
+        { opacity: 0, transform: `translate(${x}px, ${y}px) scale(.86)`, filter: 'blur(4px)' },
+        { opacity: 1, transform: 'translate(0, 0) scale(1)', filter: 'blur(0px)' }
+      ], { duration: 520, easing: 'cubic-bezier(.16,1,.3,1)', fill: 'both' });
+      motionRef.current = motion;
+      motion.onfinish = () => {
+        dialog.dataset.state = 'open';
+        motionRef.current = null;
+        motion.cancel();
+      };
+    }
+
     return () => {
+      motionRef.current?.cancel();
+      motionRef.current = null;
       if (dialog.open) dialog.close();
       document.body.style.overflow = previousOverflow;
     };
   }, [selected]);
+
+  const openSkill = (skill, event) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    originRef.current = { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+    setSelected(skill);
+  };
+
+  const closeSkill = () => {
+    const dialog = dialogRef.current;
+    if (!dialog.open || closingRef.current) return;
+    closingRef.current = true;
+    if (reducedMotion()) return dialog.close();
+
+    // 열리는 도중 닫아도 현재 위치에서 이어져서 사라지도록 한다.
+    const current = getComputedStyle(dialog);
+    const from = { opacity: current.opacity, transform: current.transform, filter: current.filter };
+    const backdrop = getComputedStyle(dialog, '::backdrop');
+    dialog.style.setProperty('--skill-backdrop-opacity', backdrop.opacity);
+    dialog.style.setProperty('--skill-backdrop-blur', backdrop.backdropFilter || backdrop.webkitBackdropFilter || 'blur(10px)');
+    motionRef.current?.cancel();
+    dialog.dataset.state = 'closing';
+    const motion = dialog.animate([
+      from,
+      { opacity: 0, transform: 'translateY(14px) scale(.96)', filter: 'blur(3px)' }
+    ], { duration: 230, easing: 'cubic-bezier(.4,0,1,1)', fill: 'both' });
+    motionRef.current = motion;
+    motion.onfinish = () => dialog.close();
+  };
 
   return (
     <section id="skills">
@@ -37,7 +92,7 @@ export default function Skills() {
               style={{ '--skill-color': skill.color }}
               aria-label={`${skill.name} 활용 경험 보기`}
               aria-haspopup="dialog"
-              onClick={() => setSelected(skill)}
+              onClick={event => openSkill(skill, event)}
             >
               {skill.featured && <span className="skill-main-label">MAIN STACK</span>}
               <span className="skill-open-mark" aria-hidden="true">+</span>
@@ -58,10 +113,11 @@ export default function Skills() {
         aria-labelledby="skill-dialog-title"
         aria-describedby="skill-dialog-summary"
         onClose={() => setSelected(null)}
-        onClick={event => { if (event.target === event.currentTarget) event.currentTarget.close(); }}
+        onCancel={event => { event.preventDefault(); closeSkill(); }}
+        onClick={event => { if (event.target === event.currentTarget) closeSkill(); }}
       >
         {selected && <div className="skill-dialog-content" style={{ '--skill-color': selected.color }}>
-          <button className="skill-dialog-close" type="button" aria-label="기술 설명 닫기" onClick={() => dialogRef.current.close()}>
+          <button className="skill-dialog-close" type="button" aria-label="기술 설명 닫기" onClick={closeSkill}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg>
           </button>
           <div className="skill-dialog-heading">
@@ -71,7 +127,7 @@ export default function Skills() {
           <p id="skill-dialog-summary" className="skill-dialog-summary">{selected.summary}</p>
           <h4 className="skill-abilities-title">이렇게 활용할 수 있어요</h4>
           <ul className="skill-abilities">
-            {selected.abilities.map((ability, index) => <li key={ability}><span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span><p>{ability}</p></li>)}
+            {selected.abilities.map((ability, index) => <li key={ability} style={{ '--skill-delay': `${220 + index * 65}ms` }}><span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span><p>{ability}</p></li>)}
           </ul>
           {selected.note && <p className="skill-note">{selected.note}</p>}
           {selected.source && <a className="skill-source" href={selected.source} target="_blank" rel="noopener noreferrer">노션에서 자세히 보기 <Arrow /></a>}

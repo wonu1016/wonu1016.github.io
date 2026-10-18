@@ -169,7 +169,16 @@ nav .links a:hover{color:var(--fg)}
 .skills-footer a:focus-visible,.skill-source:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
 .skill-dialog{position:fixed;inset:0;width:min(620px,calc(100% - 40px));max-height:calc(100svh - 48px);margin:auto;padding:0;border:1px solid var(--edge);border-radius:28px;background:var(--card);color:var(--fg);overflow:auto;overscroll-behavior:contain;box-shadow:0 32px 100px rgba(0,0,0,.35)}
 .skill-dialog::backdrop{background:rgba(3,7,18,.65);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-.skill-dialog[open]{animation:skillDialogIn .25s var(--ease)}
+.skill-dialog[data-state="opening"],.skill-dialog[data-state="closing"]{will-change:transform,opacity,filter}
+.skill-dialog[open]::backdrop{animation:skillBackdropIn .45s var(--ease) both}
+.skill-dialog[data-state="closing"]::backdrop{animation:skillBackdropOut .23s ease-in both}
+.skill-dialog[open] .skill-dialog-heading,.skill-dialog[open] .skill-dialog-summary,.skill-dialog[open] .skill-abilities-title,.skill-dialog[open] .skill-abilities li,.skill-dialog[open] .skill-note,.skill-dialog[open] .skill-source{animation:skillContentIn .45s cubic-bezier(.16,1,.3,1) both}
+.skill-dialog[open] .skill-dialog-heading{animation-delay:70ms}
+.skill-dialog[open] .skill-dialog-summary{animation-delay:130ms}
+.skill-dialog[open] .skill-abilities-title{animation-delay:180ms}
+.skill-dialog[open] .skill-abilities li{animation-delay:var(--skill-delay,220ms)}
+.skill-dialog[open] .skill-note,.skill-dialog[open] .skill-source{animation-delay:360ms}
+.skill-dialog[open] .skill-dialog-heading .skill-logo img{animation:skillLogoIn .65s cubic-bezier(.16,1,.3,1) 90ms both}
 .skill-dialog-content{position:relative;padding:36px;background:radial-gradient(ellipse at 0 0,color-mix(in srgb,var(--skill-color) 9%,transparent),transparent 55%)}
 .skill-dialog-close{position:absolute;top:20px;right:20px;display:grid;place-items:center;width:36px;height:36px;border:1px solid var(--edge);border-radius:50%;background:var(--btn);color:var(--muted);cursor:pointer;transition:color .2s,background .2s}
 .skill-dialog-close:hover{color:var(--fg);background:var(--card2)}
@@ -185,7 +194,10 @@ nav .links a:hover{color:var(--fg)}
 .skill-abilities li p{font-size:14px;line-height:1.75;color:var(--fg);word-break:keep-all;overflow-wrap:anywhere}
 .skill-note{padding:14px 16px;margin-top:24px;background:var(--card2);border-radius:12px;font-size:12px;line-height:1.7;color:var(--muted)}
 .skill-source{display:inline-flex;align-items:center;gap:8px;margin-top:28px;font-size:13px;font-weight:600;color:var(--accent)}
-@keyframes skillDialogIn{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes skillBackdropIn{from{opacity:0;backdrop-filter:blur(0);-webkit-backdrop-filter:blur(0)}to{opacity:1;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}}
+@keyframes skillBackdropOut{from{opacity:var(--skill-backdrop-opacity,1);backdrop-filter:var(--skill-backdrop-blur,blur(10px));-webkit-backdrop-filter:var(--skill-backdrop-blur,blur(10px))}to{opacity:0;backdrop-filter:blur(0);-webkit-backdrop-filter:blur(0)}}
+@keyframes skillContentIn{from{opacity:0;transform:translateY(12px);filter:blur(3px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes skillLogoIn{from{opacity:.3;transform:scale(.78) rotate(-10deg)}to{opacity:1;transform:scale(1) rotate(0)}}
 @media(max-width:760px){.skills-grid{gap:12px}.skill-trigger{min-height:166px;padding:32px 12px 22px;gap:14px}.skill-logo{width:68px;height:68px;border-radius:18px}.skill-logo img{width:46px;height:46px}.skill-name{font-size:16px}}
 @media(max-width:620px){#skills{padding:80px 0 50px}.skills-heading{display:block;margin-bottom:28px}.skills-heading p{margin-top:16px}.skills-heading p br{display:none}.skills-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.skill-trigger{min-height:168px}.skills-footer{font-size:11px;align-items:start}.skills-footer>span{max-width:145px}.skills-footer a{white-space:nowrap}.skill-dialog{width:calc(100% - 28px);border-radius:22px}.skill-dialog-content{padding:30px 24px}.skill-dialog-heading{gap:14px}.skill-dialog-heading h3{font-size:28px}.skill-dialog-heading .skill-logo{width:60px;height:60px;border-radius:16px}.skill-dialog-heading .skill-logo img{width:40px;height:40px}.skill-dialog-category{font-size:9px}.skill-dialog-close{top:14px;right:14px;width:30px;height:30px}.skill-dialog-summary{font-size:16px;margin-top:24px}}
 
@@ -340,4 +352,4 @@ footer{padding:40px 0;text-align:center;color:var(--muted);font-size:13px}
 .reveal.d1{transition-delay:.1s}.reveal.d2{transition-delay:.2s}.reveal.d3{transition-delay:.3s}
 
 ::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}.skill-dialog::backdrop{animation:none!important}}
