@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import Sbtn from './Sbtn.jsx';
 import Radar from './Radar.jsx';
+import FolioGallery from './FolioGallery.jsx';
 import { FOLIO } from '../data.js';
 import { reduce } from '../lib.js';
 
@@ -34,7 +35,9 @@ export default function FolioDetail({ source, onClosed }) {
   };
 
   useEffect(() => {
-    const onKey = e => { if (e.key === 'Escape') close(); };
+    const onKey = e => {
+      if (e.key === 'Escape' && !e.defaultPrevented && !ref.current?.querySelector('dialog[open]')) close();
+    };
     addEventListener('keydown', onKey);
     return () => removeEventListener('keydown', onKey);
   });
@@ -55,12 +58,7 @@ export default function FolioDetail({ source, onClosed }) {
             <h6>트러블슈팅</h6>
             <div className="trouble">{F.trouble.map(([k, v]) => <div key={k}><b>{k}</b>{v}</div>)}</div>
             <h6>화면</h6>
-            <div className="shots">{F.screenshots.map(({ src, title }) => (
-              <a className="shot" href={src} target="_blank" rel="noopener noreferrer" key={src} aria-label={`${title} 이미지 크게 보기`}>
-                <img src={src} alt={`Folio 서비스 화면: ${title}`} loading="lazy" />
-                <span>{title}<i aria-hidden="true">↗</i></span>
-              </a>
-            ))}</div>
+            <FolioGallery screenshots={F.screenshots} />
             <h6>링크</h6>
             <div className="btns">{F.links.map(([t, h]) => <Sbtn key={h} href={h} target="_blank" rel="noopener">{t}</Sbtn>)}</div>
           </div>

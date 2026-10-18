@@ -92,10 +92,22 @@ export const FOLIO = {
   tags: ['Node.js', 'FastAPI', 'React', '팀 AI 협업'],
   cover: './images/folio/cover.png',
   screenshots: [
-    { src: './images/folio/home.png', title: '포트폴리오 업로드 · 분석 시작' },
-    { src: './images/folio/report.png', title: '역량 분석 리포트' },
-    { src: './images/folio/recommendations.png', title: '맞춤 기업 추천' },
-    { src: './images/folio/roadmap.png', title: '커리어 로드맵' }
+    {
+      src: './images/folio/home.png', title: '포트폴리오 업로드 · 분석 시작',
+      description: '포트폴리오 파일을 첨부하고 분석 요청을 입력하는 시작 화면입니다. 파일 업로드와 분석 시작 버튼을 통해 포트폴리오 분석을 요청합니다.'
+    },
+    {
+      src: './images/folio/report.png', title: '역량 분석 리포트',
+      description: '포트폴리오에서 분석한 기술 역량과 직무별 적합도를 보여주는 결과 화면입니다. 레이더 차트와 막대 차트로 역량과 직무 적합도를 비교할 수 있습니다.'
+    },
+    {
+      src: './images/folio/recommendations.png', title: '맞춤 기업 추천',
+      description: '선호 업종·근무 형태 등의 조건으로 추천 기업을 살펴보는 화면입니다. 기업별 직무 적합도, 기술 스택 일치도와 추천 이유를 함께 확인할 수 있습니다.'
+    },
+    {
+      src: './images/folio/roadmap.png', title: '커리어 로드맵',
+      description: '현재 역량을 기준으로 3개월·6개월 후의 성장 목표를 제안하는 화면입니다. 단계별 학습 기술과 추천 프로젝트를 확인해 다음 학습 계획을 세울 수 있습니다.'
+    }
   ],
   summary: 'AI 포트폴리오 분석 서비스',
   period: '2026.01 – 04',
