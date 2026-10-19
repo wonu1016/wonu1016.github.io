@@ -44,8 +44,11 @@ export default function Projects() {
       const fit = Math.min((sw - 80) / 1200, (sh - 170) / 800);
       posK = posKy = cardK = Math.max(.5, Math.min(1.1, fit));
       if (sw < 700) { // 폰: 가로는 좁히고 세로 공간을 더 써서 카드가 화면 안에 모이게
-        posK = Math.max(.24, (sw - 80) / 1200);
         cardK = Math.max(.5, Math.min(.62, sw / 640));
+        const sideCards = items.filter(i => i.x !== 0);
+        const sideWidth = Math.max(...sideCards.map(i => i.el.offsetWidth));
+        const sideX = Math.max(...sideCards.map(i => Math.abs(i.x)));
+        posK = Math.max(.14, Math.min((sw - 80) / 1200, (sw - sideWidth * cardK - 32) / (sideX * 2)));
         posKy = Math.max(.5, Math.min(1, (sh - 170) / 800));
       }
       items.forEach(i => { i.w = i.el.offsetWidth; i.h = i.el.offsetHeight; });

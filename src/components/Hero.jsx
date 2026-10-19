@@ -63,7 +63,7 @@ export default function Hero({ theme }) {
       </div>
       <div className="hero-copy">
         <h1>안녕하세요<br /><span className="typed-line"><Typed words={TYPED_WORDS} /></span>개발자 양원우입니다</h1>
-        <p>경북소프트웨어마이스터고 · Backend Developer</p>
+        <p>경북소프트웨어마이스터고 · <span className="hero-role">Backend Developer</span></p>
       </div>
       <div className="scroll-hint">SCROLL<i /></div>
     </section>
