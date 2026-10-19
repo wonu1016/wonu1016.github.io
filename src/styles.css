@@ -170,9 +170,9 @@ nav .links a:hover{color:var(--fg)}
 .skills-footer a{display:inline-flex;align-items:center;gap:7px;color:var(--accent);font-weight:600}
 .skills-footer a:hover,.skill-source:hover{text-decoration:underline;text-underline-offset:4px}
 .skills-footer a:focus-visible,.skill-source:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
-.skill-dialog{position:fixed;inset:0;width:min(620px,calc(100% - 40px));max-height:calc(100svh - 48px);margin:auto;padding:0;border:1px solid var(--edge);border-radius:28px;background:var(--card);color:var(--fg);overflow:auto;overscroll-behavior:contain;box-shadow:0 32px 100px rgba(0,0,0,.35)}
+.skill-dialog{position:fixed;inset:0;width:min(620px,calc(100% - 40px));max-height:calc(100svh - 48px);margin:auto;padding:0;border:1px solid var(--edge);border-radius:28px;background:var(--card);color:var(--fg);overflow:hidden;box-shadow:0 32px 100px rgba(0,0,0,.35)}
 .skill-dialog::backdrop{background:rgba(3,7,18,.65);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-.skill-dialog[data-state="opening"],.skill-dialog[data-state="closing"]{will-change:transform,opacity,filter}
+.skill-dialog[data-state="opening"] .skill-dialog-content,.skill-dialog[data-state="closing"]{will-change:transform,opacity,filter}
 .skill-dialog[open]::backdrop{animation:skillBackdropIn .7s cubic-bezier(.22,.61,.36,1) both}
 .skill-dialog[data-state="closing"]::backdrop{animation:skillBackdropOut .32s ease-in both}
 .skill-dialog[open] .skill-dialog-heading,.skill-dialog[open] .skill-dialog-summary,.skill-dialog[open] .skill-abilities-title,.skill-dialog[open] .skill-abilities li,.skill-dialog[open] .skill-note,.skill-dialog[open] .skill-source{animation:skillContentIn .65s cubic-bezier(.22,.61,.36,1) both}
@@ -182,8 +182,8 @@ nav .links a:hover{color:var(--fg)}
 .skill-dialog[open] .skill-abilities li{animation-delay:var(--skill-delay,460ms)}
 .skill-dialog[open] .skill-note,.skill-dialog[open] .skill-source{animation-delay:var(--skill-footer-delay,790ms)}
 .skill-dialog[open] .skill-dialog-heading .skill-logo img{animation:skillLogoIn .9s cubic-bezier(.22,.61,.36,1) 100ms both}
-.skill-dialog-content{position:relative;padding:36px;background:radial-gradient(ellipse at 0 0,color-mix(in srgb,var(--skill-color) 9%,transparent),transparent 55%)}
-.skill-dialog-close{position:absolute;top:20px;right:20px;display:grid;place-items:center;width:36px;height:36px;border:1px solid var(--edge);border-radius:50%;background:var(--btn);color:var(--muted);cursor:pointer;transition:color .2s,background .2s}
+.skill-dialog-content{position:relative;max-height:calc(100svh - 50px);overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;padding:36px;background:radial-gradient(ellipse at 0 0,color-mix(in srgb,var(--skill-color) 9%,transparent),transparent 55%)}
+.skill-dialog-close{position:absolute;z-index:2;top:20px;right:20px;display:grid;place-items:center;width:36px;height:36px;border:1px solid var(--edge);border-radius:50%;background:var(--card);color:var(--muted);cursor:pointer;transition:color .2s,background .2s}
 .skill-dialog-close:hover{color:var(--fg);background:var(--card2)}
 .skill-dialog-close:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .skill-dialog-heading{display:flex;align-items:center;gap:20px;padding-right:24px}
